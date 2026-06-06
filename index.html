@@ -38,6 +38,11 @@
   .n-medio{background:#fdf0dd;color:#b9690e;}
   .n-dificil{background:#fbe2df;color:#b32d22;}
   .tema{font-size:11px;color:var(--cinza);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-top:14px;}
+  .cidade-selo{display:inline-block;background:var(--suave);color:var(--verde-esc);font-weight:700;font-size:13px;padding:7px 16px;border-radius:18px;margin-bottom:16px;}
+  .comp-linha{display:flex;gap:12px;margin:14px 0 6px;}
+  .comp-box{flex:1;background:var(--suave);border-radius:12px;padding:14px 8px;text-align:center;}
+  .comp-v{font-size:26px;font-weight:800;line-height:1;}
+  .comp-l{font-size:11.5px;color:var(--cinza);margin-top:6px;}
   /* blocos */
   .card.bloco{border-top:6px solid var(--bcor,#1b9e54);}
   .bloco-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:4px 11px;border-radius:14px;color:#fff;background:var(--bcor,#1b9e54);}
@@ -129,130 +134,122 @@ try{
 }catch(e){ console.warn("Firebase nao iniciado:",e); }
 
 const PERGUNTAS = [
+  // ---------- BLOCO FOGO E AR ----------
   {nivel:"facil",tema:"Queima de quintal",bloco:"fogo",
-   q:"Juntar folha seca e botar fogo no quintal faz mal por quê?",
-   correta:2,
-   explica:"A fumaça é cheia de partículas finas (o material particulado) que entram fundo no pulmão e agravam asma, bronquite e doenças do coração.",
+   q:"Pensando no seu quintal: alguém junta folha seca e põe fogo. O que essa fumaça causa principalmente em quem está perto?",
+   correta:1,
+   explica:"A fumaça concentra partículas finas que entram fundo no pulmão. O efeito principal e comprovado é sobre a respiração: tosse, falta de ar e crises de asma e bronquite.",
    ops:[
-     "Atrai insetos que transmitem doenças para dentro de casa",
-     "O calor do fogo desidrata quem estiver por perto do quintal",
-     "Solta partículas finas que entram no pulmão e pioram doenças",
-     "O cheiro forte da fumaça provoca uma dor de cabeça passageira"
-   ]},
+     "Deixa a pele manchada por causa da fuligem que gruda no corpo",
+     "Irrita o pulmão e provoca tosse, falta de ar e crises de asma",
+     "Aumenta a pressão arterial por causa do cheiro forte da fumaça",
+     "Atrapalha a visão e causa tontura por algumas horas seguidas"]},
   {nivel:"medio",tema:"Queima e clima",bloco:"fogo",
-   q:"Como as mudanças climáticas tornam essas queimas urbanas mais perigosas?",
-   correta:0,
-   explica:"Secas mais longas e calor extremo deixam a vegetação seca e o fogo se espalha fácil. O ar quente e parado ainda segura a fumaça sobre a cidade.",
+   q:"Na sua cidade, por que as queimas de quintal ficam mais perigosas em anos de seca forte?",
+   correta:2,
+   explica:"Na estiagem a vegetação fica ressecada. O fogo que seria pequeno encontra material seco ao redor e escapa do controle com facilidade, atingindo terrenos e casas vizinhas.",
    ops:[
-     "Seca e calor deixam tudo inflamável e prendem a fumaça sobre a cidade",
-     "Deixam o solo bem mais úmido, o que faz o fogo durar muito mais tempo",
-     "Aumentam tanto o vento que o fogo se apaga sozinho rapidamente",
-     "Reduzem a chuva ácida da região e concentram a fumaça toda no chão"
-   ]},
+     "Porque a fumaça da seca é mais tóxica do que a fumaça da chuva",
+     "Porque o solo seco absorve o fogo e o devolve mais forte à noite",
+     "Porque a vegetação ressecada pega fogo fácil e as chamas escapam do controle",
+     "Porque na seca o fogo queima mais devagar e dura vários dias"]},
+  // ---------- BLOCO CIDADE VERDE ----------
   {nivel:"facil",tema:"Praça arborizada",bloco:"verde",
-   q:"Por que uma praça pública bem arborizada é importante para a cidade?",
-   correta:1,
-   explica:"As árvores dão sombra, baixam a temperatura, filtram poluentes e oferecem espaço de convívio e atividade física, tudo com efeito direto na saúde.",
+   q:"Pensando na praça do seu bairro num dia de calor: qual é o efeito direto das árvores sobre a saúde de quem está ali?",
+   correta:3,
+   explica:"A sombra das árvores baixa a temperatura embaixo delas em vários graus. Isso reduz o risco de mal-estar, insolação e desidratação em quem usa a praça no calor.",
    ops:[
-     "Porque atrai turistas de fora e acaba movimentando bastante o comércio do entorno",
-     "Dá sombra, refresca o ar e melhora a saúde de quem vive ali",
-     "Porque valoriza os imóveis vizinhos e deixa o bairro inteiro mais bonito",
-     "Porque vira palco para feiras, shows e grandes eventos da prefeitura local"
-   ]},
+     "As árvores eliminam por completo o risco de qualquer doença respiratória",
+     "As árvores espantam os mosquitos e por isso acabam com a dengue",
+     "As árvores deixam o ar mais úmido e por isso provocam mais gripes",
+     "A sombra baixa a temperatura e reduz o risco de insolação e mal-estar"]},
   {nivel:"medio",tema:"Ilha de calor",bloco:"verde",
-   q:"Uma área da cidade com muito concreto e pouca árvore tende a ficar como?",
-   correta:3,
-   explica:"É a ilha de calor: asfalto e concreto absorvem e devolvem calor, deixando bairros sem vegetação vários graus mais quentes que áreas verdes próximas.",
+   q:"Comparando duas ruas da sua cidade no mesmo horário, uma cheia de árvores e outra só de asfalto e concreto, o que acontece com a temperatura?",
+   correta:0,
+   explica:"Asfalto e concreto absorvem calor durante o dia e o devolvem ao ar. A rua sem árvores fica mais quente que a arborizada, fenômeno conhecido como ilha de calor.",
    ops:[
-     "Mais fria, porque o concreto reflete a luz do sol de volta para o céu",
-     "Com a mesma temperatura das outras, pois o calor vem só do sol",
-     "Mais úmida, porque a chuva não evapora do asfalto e fica acumulada",
-     "Mais quente que as áreas verdes, formando ilhas de calor"
-   ]},
+     "A rua de asfalto fica mais quente que a rua arborizada",
+     "As duas ruas ficam exatamente com a mesma temperatura",
+     "A rua de asfalto fica mais fria por refletir a luz do sol",
+     "A rua arborizada fica mais quente porque as árvores seguram o calor"]},
   {nivel:"dificil",tema:"Lei e arborização",bloco:"verde",
-   q:"Sobre o plano municipal de arborização urbana no Brasil, o que é correto?",
+   q:"Sobre a responsabilidade de arborizar as ruas e praças da sua cidade, o que diz a legislação brasileira?",
    correta:2,
-   explica:"O Estatuto da Cidade (Lei Federal 10.257/2001) prevê esses planos, e o Plano Nacional de Arborização Urbana orienta os municípios. Em 2026 o TCE-MT cobrou que o estado e os municípios avancem nisso.",
-   fonte:"Estatuto da Cidade (Lei 10.257/2001); PlaNAU/MMA; decisão do TCE-MT, abril de 2026.",
+   explica:"O Estatuto da Cidade prevê que o planejamento urbano inclua áreas verdes, e o cuidado com a arborização de ruas e praças é atribuição do município, não de cada morador isolado.",
+   fonte:"Estatuto da Cidade, Lei Federal 10.257/2001; Plano Nacional de Arborização Urbana (MMA).",
    ops:[
-     "É proibido por lei plantar qualquer árvore nas calçadas de vias públicas",
-     "Apenas a União pode decidir sobre as árvores que ficam dentro das cidades",
-     "O município pode ter um plano de arborização ligado ao clima",
-     "Arborizar a cidade não tem nenhuma relação com a adaptação ao clima"
-   ]},
+     "É proibido plantar árvores em calçadas, isso cabe apenas ao morador",
+     "Nenhuma lei trata de árvores nas cidades, é decisão de cada vizinho",
+     "Cuidar da arborização das ruas e praças é uma atribuição do município",
+     "Somente o governo federal pode autorizar o plantio dentro das cidades"]},
   {nivel:"medio",tema:"Incentivo verde",bloco:"verde",
-   q:"O chamado IPTU verde, já adotado por várias cidades brasileiras, funciona como?",
-   correta:3,
-   explica:"É um desconto no IPTU para quem adota práticas sustentáveis, como manter árvores, áreas permeáveis ou captação de água de chuva. Os percentuais variam de cidade para cidade.",
-   fonte:"Programas municipais de IPTU verde (ex: São Paulo, Salvador, Belo Horizonte). Os percentuais variam por município.",
+   q:"Em várias cidades do Brasil existe o chamado IPTU verde. O que um morador ganha com ele?",
+   correta:1,
+   explica:"O IPTU verde concede desconto no imposto a quem mantém práticas sustentáveis no imóvel, como conservar árvores ou captar água da chuva. O percentual muda conforme a cidade.",
+   fonte:"Programas municipais de IPTU verde (ex: São Paulo, Salvador, Belo Horizonte). Percentuais variam por município.",
    ops:[
-     "Cobra um imposto extra de todo mundo que não tiver nenhuma árvore no terreno",
-     "Isenta de qualquer imposto absolutamente todos os imóveis da cidade",
-     "É uma multa ambiental que o governo federal aplica nas cidades",
-     "Dá desconto no IPTU para quem mantém árvores ou capta água de chuva"
-   ]},
+     "Paga mais imposto se tiver árvores ocupando espaço no terreno",
+     "Ganha desconto no imposto por manter árvores ou captar água da chuva",
+     "Recebe do governo federal um valor em dinheiro todo mês",
+     "Fica isento de todos os impostos da casa por tempo indeterminado"]},
+  // ---------- BLOCO ÁGUA ----------
   {nivel:"facil",tema:"Água e saúde",bloco:"agua",
-   q:"Por que água tratada chegando na torneira é tão importante para a saúde?",
+   q:"Pensando na água que chega na torneira da sua casa: por que ela passa por tratamento antes de chegar?",
    correta:0,
-   explica:"O tratamento remove sujeira e mata micro-organismos. Sem isso, a água transmite diarreia, hepatite, verminoses e outras doenças, principalmente em crianças.",
+   explica:"O tratamento remove sujeira e elimina micro-organismos que causam doença. Sem isso, a água pode transmitir diarreia, hepatite e verminoses, sobretudo em crianças.",
    ops:[
-     "Evita doenças causadas por micro-organismos e sujeira na água",
-     "Porque a água já tratada hidrata bem mais que a água comum da rua",
-     "Porque deixa a água com um gosto bem melhor na hora de beber",
-     "Porque reduz o gasto da casa com filtros e com caixas-d'água"
-   ]},
+     "Para eliminar micro-organismos que causam diarreia e outras doenças",
+     "Para deixar a água com um sabor mais agradável ao paladar",
+     "Para que a água hidrate mais o corpo do que a água sem tratamento",
+     "Para que a água dure mais tempo guardada na caixa sem estragar"]},
   {nivel:"medio",tema:"Água e clima",bloco:"agua",
-   q:"Como as mudanças climáticas afetam a quantidade de água que chega à cidade?",
-   correta:2,
-   explica:"Estiagens mais longas e chuvas concentradas em poucos dias bagunçam a oferta: rios e mananciais baixam na seca e a enxurrada se perde sem infiltrar no solo.",
-   ops:[
-     "Não afetam em nada, pois a água vem de poços profundos e bem estáveis",
-     "Aumentam a água que temos, pois o calor evapora mais água dos oceanos",
-     "Secas longas e chuvas concentradas reduzem a água dos rios e mananciais",
-     "Afetam apenas a qualidade da água, nunca a quantidade que de fato chega"
-   ]},
-  {nivel:"medio",tema:"Doenças e clima",bloco:"gestao",
-   q:"O calor e as chuvas fora de época aumentam casos de dengue por quê?",
-   correta:1,
-   explica:"O mosquito Aedes se reproduz mais rápido no calor. Água parada somada a temperaturas altas amplia e prolonga as épocas de transmissão de dengue, zika e chikungunya.",
-   ops:[
-     "Porque a chuva acaba trazendo mosquitos de outras regiões mais distantes",
-     "O calor acelera a reprodução do mosquito e estende a época de transmissão",
-     "Porque o calor intenso mata todos os predadores naturais do mosquito",
-     "Porque o mosquito passa a picar bem mais quando a noite esfria um pouco"
-   ]},
-  {nivel:"dificil",tema:"Programa federal",bloco:"gestao",
-   q:"Qual é a estratégia do Ministério da Saúde para preparar o SUS para os impactos das mudanças climáticas?",
+   q:"Na sua cidade, como uma seca mais longa do que o normal tende a afetar o abastecimento de água?",
    correta:3,
-   explica:"O AdaptaSUS é a ação do Ministério da Saúde, dentro do Plano Clima do Brasil, para fortalecer a resposta do SUS ao calor extremo, poluição do ar, inundações e outros eventos.",
-   fonte:"Ministério da Saúde / BVS, lançamento do Guia de Mudanças Climáticas e Saúde.",
+   explica:"Na seca prolongada os rios e mananciais que abastecem a cidade baixam o nível. Com menos água na fonte, o abastecimento fica ameaçado e pode haver racionamento.",
    ops:[
-     "O programa federal chamado Bolsa Verde do clima",
-     "O programa nacional conhecido como Auxílio Brasil Climático",
-     "O programa de atenção básica chamado Mais Médicos",
-     "O AdaptaSUS, que faz parte do Plano Clima"
-   ]},
+     "Aumenta a água disponível, porque o calor traz mais chuva depois",
+     "Não muda nada, porque a água vem de reservas que nunca baixam",
+     "Melhora a qualidade da água, porque a seca limpa os rios",
+     "Reduz o nível dos rios e mananciais e ameaça o abastecimento"]},
+  // ---------- BLOCO SAÚDE E GESTÃO PÚBLICA ----------
+  {nivel:"medio",tema:"Doenças e clima",bloco:"gestao",
+   q:"Por que períodos mais quentes costumam aumentar os casos de dengue no seu bairro?",
+   correta:2,
+   explica:"O calor acelera o ciclo de vida do mosquito Aedes aegypti. Com água parada disponível, ele se reproduz mais rápido e em maior quantidade, elevando os casos de dengue.",
+   ops:[
+     "Porque o calor faz o vírus da dengue se espalhar pelo ar",
+     "Porque no calor as pessoas bebem menos água e adoecem",
+     "Porque o calor acelera a reprodução do mosquito da dengue",
+     "Porque o calor enfraquece os remédios usados contra a dengue"]},
   {nivel:"dificil",tema:"Programa federal",bloco:"gestao",
-   q:"O que o Brasil lançou na COP30, em Belém, voltado especificamente para o setor saúde?",
+   q:"O Ministério da Saúde criou uma estratégia para preparar o SUS diante do calor extremo, das enchentes e da poluição do ar. Qual é o nome dela?",
+   correta:3,
+   explica:"O AdaptaSUS é a estratégia do Ministério da Saúde, dentro do Plano Clima do Brasil, para tornar o SUS mais preparado para os efeitos das mudanças climáticas na saúde.",
+   fonte:"Ministério da Saúde, AdaptaSUS, no âmbito do Plano Clima do Brasil.",
+   ops:[
+     "Bolsa Verde",
+     "Auxílio Clima",
+     "Mais Médicos",
+     "AdaptaSUS"]},
+  {nivel:"dificil",tema:"Programa federal",bloco:"gestao",
+   q:"Em 2025, na COP30 em Belém, o Brasil apresentou um plano internacional inédito. Sobre o que era esse plano?",
    correta:1,
-   explica:"O Plano de Ação em Saúde de Belém foi o primeiro plano internacional dedicado só à saúde, com 60 ações para fortalecer vigilância, políticas e inovação diante dos riscos climáticos.",
-   fonte:"Ministério da Saúde, COP30 (novembro de 2025).",
+   explica:"O Plano de Ação em Saúde de Belém foi o primeiro plano internacional voltado especificamente para o setor saúde, reunindo ações para proteger as pessoas dos riscos do clima.",
+   fonte:"Ministério da Saúde, Plano de Ação em Saúde de Belém, COP30, novembro de 2025.",
    ops:[
-     "Um fundo mundial recém-criado que passa a substituir todo o financiamento do SUS",
-     "O Plano de Ação em Saúde de Belém, com 60 ações para o setor",
-     "A primeira assinatura brasileira do chamado Acordo de Paris do clima",
-     "O SUS Verde, um novo sistema de saúde paralelo só para o clima"
-   ]},
+     "Era um plano para acabar com o desmatamento da Amazônia",
+     "Era um plano para preparar a saúde diante das mudanças do clima",
+     "Era um plano para construir novas hidrelétricas no país",
+     "Era um plano para substituir o SUS por um sistema novo"]},
   {nivel:"dificil",tema:"Responsabilidade pública",bloco:"gestao",
-   q:"Por que cuidar de saúde e clima juntos é também tarefa do município, e não só de cada pessoa?",
+   q:"Quando falta arborização, saneamento e coleta de lixo num bairro, de quem é a principal responsabilidade de resolver?",
    correta:0,
-   explica:"Decisões municipais sobre arborização, saneamento, coleta de lixo, uso do solo e fiscalização de queimadas determinam a quem fica exposto ao risco. Escolha individual não substitui política pública.",
+   explica:"Esses serviços são políticas públicas de responsabilidade do município. O cuidado individual ajuda, mas não substitui a obrigação do poder público de garantir essa estrutura.",
    ops:[
-     "Porque decisões sobre árvores, água e lixo definem quem fica exposto ao risco",
-     "Porque o município pode multar quem não cuida bem da própria saúde",
-     "Porque o clima é um problema global e a cidade não tem o que fazer",
-     "Porque só o governo federal tem dinheiro para poder resolver o clima"
-   ]}
+     "Do poder público municipal, que responde por esses serviços",
+     "De cada morador, que deveria resolver por conta própria",
+     "De ninguém, pois esses problemas não têm solução possível",
+     "Apenas do governo federal, único que pode agir nos bairros"]}
 ];
 
 const BLOCOS = {
@@ -267,7 +264,33 @@ let nome="",idx=0,pontos=0,respondeu=false,detalhe=[];
 const app=document.getElementById('app');
 const params=new URLSearchParams(location.search);
 const modoPainel=params.get('painel')==='1';
-const RKEY='quiz_saude_clima';
+
+// Catálogo de municípios. Para adicionar um novo, basta incluir aqui (slug: nome).
+// Qualquer slug informado em ?cidade= funciona mesmo sem estar no catálogo.
+const CIDADES={
+  caceres:"Cáceres-MT",
+  araputanga:"Araputanga-MT",
+  "reserva-do-cabacal":"Reserva do Cabaçal-MT"
+};
+function normalizaSlug(s){
+  return (s||'').toLowerCase().trim()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+const cidadeSlug=normalizaSlug(params.get('cidade'));
+const cidadeNome=cidadeSlug?(CIDADES[cidadeSlug]||(cidadeSlug.charAt(0).toUpperCase()+cidadeSlug.slice(1).replace(/-/g,' '))):"";
+// Cada município grava no seu próprio nó. Sem cidade definida, usa um nó genérico.
+const RKEY = cidadeSlug ? ('quiz_saude_clima/cidades/'+cidadeSlug) : 'quiz_saude_clima/geral';
+
+// Mantém ?cidade= ao gerar links/QR, descartando outros parâmetros (painel etc.)
+function urlBase(){
+  const u=location.href.split('?')[0];
+  return cidadeSlug ? (u+'?cidade='+cidadeSlug) : u;
+}
+function urlPainel(){
+  const sep = urlBase().includes('?') ? '&' : '?';
+  return urlBase()+sep+'painel=1';
+}
 
 function telaInicial(){
   app.innerHTML=`
@@ -277,14 +300,15 @@ function telaInicial(){
       <p class="sub">Doze perguntas sobre o que acontece no seu quintal, na sua rua e na sua cidade. Cada pessoa responde no seu tempo.</p>
     </div>
     <div class="card">
+      ${cidadeNome?`<div class="cidade-selo">${escapeHtml(cidadeNome)}</div>`:''}
       <label for="nm">Seu nome ou apelido</label>
       <input type="text" id="nm" placeholder="Ex: Maria S." maxlength="22" autocomplete="off">
       <button class="btn btn-verde" id="comecar">Começar o quiz</button>
-      <button class="btn btn-claro" id="verpainel">Ver resultados do evento</button>
+      <button class="btn btn-claro" id="verpainel">Ver resultados do grupo</button>
       <button class="btn btn-claro" id="abrirqr">Mostrar QR code</button>
-      ${firebaseOk?'':'<div class="hint">Modo offline: resultados do evento e sugestões desativados (Firebase não configurado).</div>'}
+      ${firebaseOk?'':'<div class="hint">Modo offline: resultados e sugestões desativados (Firebase não configurado).</div>'}
     </div>
-    <div class="rodape">Cáceres-MT · Saúde e mudanças climáticas</div>`;
+    <div class="rodape">${cidadeNome?escapeHtml(cidadeNome):'Cáceres-MT'} · Saúde e mudanças climáticas</div>`;
   document.getElementById('comecar').onclick=()=>{
     const v=document.getElementById('nm').value.trim();
     if(!v){document.getElementById('nm').focus();return;}
@@ -294,14 +318,31 @@ function telaInicial(){
   document.getElementById('abrirqr').onclick=telaQR;
 }
 
+function telaEscolheCidade(){
+  const botoes=Object.entries(CIDADES).map(([slug,nome])=>
+    `<a class="btn btn-verde" style="text-decoration:none;text-align:center" href="${location.href.split('?')[0]}?cidade=${slug}">${escapeHtml(nome)}</a>`
+  ).join('');
+  app.innerHTML=`
+    <div class="topo">
+      <span class="tag">Conferência Municipal de Saúde</span>
+      <h1>Saúde e Clima: quanto você sabe?</h1>
+      <p class="sub">Escolha o seu município para começar. Cada cidade tem o seu próprio quiz e os seus próprios resultados.</p>
+    </div>
+    <div class="card">
+      <label>Selecione o município</label>
+      ${botoes}
+    </div>
+    <div class="rodape">Saúde e mudanças climáticas</div>`;
+}
+
 function telaQR(){
   app.innerHTML=`
     <div class="topo"><span class="tag">Compartilhar</span><h1>Aponte a câmera</h1>
-    <p class="sub">Cada pessoa abre o quiz no próprio celular.</p></div>
+    <p class="sub">Cada pessoa abre o quiz de ${escapeHtml(cidadeNome)} no próprio celular.</p></div>
     <div class="card"><div id="qrbox"></div>
-    <div class="url-mini">${location.href.split('?')[0]}</div>
+    <div class="url-mini">${urlBase()}</div>
     <button class="btn btn-azul" id="voltar">Voltar</button></div>`;
-  new QRCode(document.getElementById('qrbox'),{text:location.href.split('?')[0],width:220,height:220,colorDark:"#127a40",colorLight:"#ffffff"});
+  new QRCode(document.getElementById('qrbox'),{text:urlBase(),width:220,height:220,colorDark:"#127a40",colorLight:"#ffffff"});
   document.getElementById('voltar').onclick=telaInicial;
 }
 
@@ -390,6 +431,7 @@ function faixa(p){
 
 function telaFinal(){
   const f=faixa(pontos);
+  const meuPct=Math.round(pontos/PERGUNTAS.length*100);
   app.innerHTML=`
     <div class="card placar-final">
       <span class="tag" style="background:var(--suave);color:var(--verde-esc);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600">Seu resultado</span>
@@ -399,19 +441,49 @@ function telaFinal(){
       <div id="salvomsg" class="hint"></div>
     </div>
     <div class="card">
+      <div class="secao-tit" style="margin-top:0">Você e o grupo</div>
+      <div class="comp-linha">
+        <div class="comp-box"><div class="comp-v" style="color:var(--verde-esc)">${meuPct}%</div><div class="comp-l">seu acerto</div></div>
+        <div class="comp-box"><div class="comp-v" id="grupoPct" style="color:var(--azul)">--</div><div class="comp-l">média do grupo</div></div>
+        <div class="comp-box"><div class="comp-v" id="grupoN" style="color:var(--cinza)">--</div><div class="comp-l">participantes</div></div>
+      </div>
+      <div id="compMsg" class="hint" style="text-align:left"></div>
+    </div>
+    <div class="card">
       <label for="sug">Deixe uma sugestão para a conferência (opcional)</label>
       <textarea id="sug" maxlength="280" placeholder="Ex: mais árvores na praça do meu bairro, limpeza dos córregos..."></textarea>
       <button class="btn btn-azul" id="enviarsug">Enviar sugestão</button>
       <div id="sugmsg" class="hint"></div>
     </div>
-    <button class="btn btn-claro" id="verpainel">Ver resultados do evento</button>
+    <button class="btn btn-claro" id="verpainel">Ver resultados do grupo</button>
     <button class="btn btn-verde" id="dnovo">Jogar de novo</button>
-    <div class="rodape">Conferência Municipal de Saúde · Cáceres-MT</div>`;
+    <div class="rodape">Conferência Municipal de Saúde${cidadeNome?(' · '+escapeHtml(cidadeNome)):''}</div>`;
   document.getElementById('dnovo').onclick=telaInicial;
   document.getElementById('verpainel').onclick=telaPainel;
   document.getElementById('enviarsug').onclick=enviarSugestao;
   if(firebaseOk)salvarResultado();
-  else document.getElementById('salvomsg').textContent='Modo offline: resultado não registrado.';
+  else { document.getElementById('salvomsg').textContent='Modo offline: resultado não registrado.';
+         document.getElementById('compMsg').textContent='Sem conexão, não dá para comparar com o grupo.'; }
+}
+
+function mostrarComparacao(){
+  const max=PERGUNTAS.length;
+  db.ref(RKEY+'/participantes').once('value',snap=>{
+    const arr=[];snap.forEach(c=>arr.push(c.val()));
+    const n=arr.length;
+    if(!n){return;}
+    const mediaPct=Math.round(arr.reduce((s,p)=>s+p.pontos,0)/n/max*100);
+    const meuPct=Math.round(pontos/max*100);
+    const gp=document.getElementById('grupoPct'), gn=document.getElementById('grupoN'), msg=document.getElementById('compMsg');
+    if(gp)gp.textContent=mediaPct+'%';
+    if(gn)gn.textContent=n;
+    if(msg){
+      if(n===1) msg.textContent='Você é a primeira pessoa a participar. Conforme mais gente responde, a média do grupo aparece aqui.';
+      else if(meuPct>mediaPct) msg.textContent='Você acertou acima da média do grupo.';
+      else if(meuPct<mediaPct) msg.textContent='Você ficou abaixo da média do grupo, vale revisar os temas.';
+      else msg.textContent='Você acertou exatamente na média do grupo.';
+    }
+  });
 }
 
 function salvarResultado(){
@@ -426,7 +498,7 @@ function salvarResultado(){
     porBloco[d.bloco].t++; if(d.acertou)porBloco[d.bloco].a++;
   });
   db.ref(RKEY+'/participantes').push({nome:nome,pontos:pontos,total:PERGUNTAS.length,nivel:porNivel,tema:porTema,bloco:porBloco,ts:Date.now()})
-    .then(()=>{document.getElementById('salvomsg').textContent='Seu resultado entrou nas estatísticas do evento.';})
+    .then(()=>{document.getElementById('salvomsg').textContent='Seu resultado entrou nas estatísticas do grupo.';mostrarComparacao();})
     .catch(()=>{document.getElementById('salvomsg').textContent='Não foi possível registrar agora.';});
 }
 
@@ -443,7 +515,7 @@ function enviarSugestao(){
 function telaPainel(){
   app.innerHTML=`
     <div class="topo"><span class="tag">Resultados do evento</span>
-      <h1>Saúde e Clima na Conferência</h1>
+      <h1>Saúde e Clima${cidadeNome?(' em '+escapeHtml(cidadeNome)):''}</h1>
       <p class="sub">Atualiza sozinho conforme as pessoas participam.</p></div>
     <div class="card" id="boxstats"><div class="hint">Carregando...</div></div>
     <div class="card"><div class="secao-tit">Desempenho por bloco</div>
@@ -463,7 +535,7 @@ function telaPainel(){
       <div class="secao-tit" style="margin-top:18px">Mural de sugestões</div>
       <div id="boxsug"></div></div>
     ${modoPainel?'':'<button class="btn btn-claro" id="voltar">Voltar ao início</button>'}
-    <div class="rodape">Conferência Municipal de Saúde · Cáceres-MT</div>`;
+    <div class="rodape">Conferência Municipal de Saúde${cidadeNome?(' · '+escapeHtml(cidadeNome)):''}</div>`;
   if(!modoPainel)document.getElementById('voltar').onclick=telaInicial;
   if(!firebaseOk){
     document.getElementById('boxstats').innerHTML='<div class="erro-cfg">Configure o Firebase para ver os resultados do evento.</div>';
@@ -485,12 +557,13 @@ function renderStats(arr){
   const media=n?(arr.reduce((s,p)=>s+p.pontos,0)/n):0;
   const bons=arr.filter(p=>p.pontos/max>=0.6).length;
   const pctMedio=n?Math.round(media/max*100):0;
+  const aviso = n===1 ? '<div class="hint" style="margin-top:12px">Apenas 1 participante até agora. Os percentuais refletem essa única pessoa e vão se ajustar conforme o grupo cresce.</div>' : (n===0?'<div class="hint" style="margin-top:12px">Ainda sem participantes.</div>':'');
   document.getElementById('boxstats').innerHTML=`
     <div class="stat-linha">
       <div class="stat"><div class="v">${n}</div><div class="l">participantes</div></div>
-      <div class="stat"><div class="v">${pctMedio}%</div><div class="l">acerto médio</div></div>
+      <div class="stat"><div class="v">${pctMedio}%</div><div class="l">acerto médio do grupo</div></div>
       <div class="stat"><div class="v">${n?Math.round(bons/n*100):0}%</div><div class="l">acertaram 60%+</div></div>
-    </div>`;
+    </div>${aviso}`;
 }
 
 function renderBlocos(arr){
@@ -567,22 +640,30 @@ function renderGrafico(arr){
   document.getElementById('boxgraf').innerHTML=html||'<div class="hint">Sem dados ainda.</div>';
 }
 
-const STOP=new Set(['a','o','as','os','de','da','do','das','dos','e','em','no','na','nos','nas','um','uma','para','pra','por','com','que','mais','meu','minha','se','ao','aos','é','the','of','sua','seu','tem','ter','muito','isso','esse','essa','mas','dos','nas']);
+const STOP=new Set(['a','o','as','os','de','da','do','das','dos','e','em','no','na','nos','nas','um','uma','para','pra','por','com','que','mais','meu','minha','se','ao','aos','é','the','of','sua','seu','tem','ter','muito','isso','esse','essa','mas','não','nao','só','sao','são','dos','nas','como','onde','quando','também','tambem','toda','todo','todas','todos','ser','estar','foi','tão','tao','até','ate','sem','sobre']);
 function renderNuvem(arr){
+  // conta cada palavra UMA vez por sugestão, para uma pessoa não inflar um termo repetindo-o
   const freq={};
   arr.forEach(s=>{
+    const vistas=new Set();
     (s.texto||'').toLowerCase().replace(/[.,;:!?()"]/g,' ').split(/\s+/).forEach(w=>{
       w=w.trim();
-      if(w.length>=4&&!STOP.has(w))freq[w]=(freq[w]||0)+1;
+      if(w.length>=4 && !STOP.has(w)) vistas.add(w);
     });
+    vistas.forEach(w=>{freq[w]=(freq[w]||0)+1;});
   });
   const pares=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,30);
   if(!pares.length){document.getElementById('boxnuvem').innerHTML='<div class="hint">Sem sugestões ainda.</div>';return;}
   const maxf=pares[0][1];
+  const minf=pares[pares.length-1][1];
   document.getElementById('boxnuvem').innerHTML=pares.map(([w,f])=>{
-    const size=14+Math.round((f/maxf)*26);
-    const op=0.55+0.45*(f/maxf);
-    return `<span style="font-size:${size}px;opacity:${op}">${escapeHtml(w)}</span>`;
+    // só varia o tamanho quando há diferença real de frequência entre as palavras
+    let t;
+    if(maxf===minf) t=0;                       // todas iguais: tamanho uniforme
+    else t=(f-minf)/(maxf-minf);               // normaliza 0..1
+    const size=17+Math.round(t*17);            // 17px a 34px, faixa mais suave
+    const op=0.7+0.3*t;
+    return `<span style="font-size:${size}px;opacity:${op.toFixed(2)}">${escapeHtml(w)} <span style="font-size:11px;opacity:.6;font-weight:400">${f>1?'('+f+')':''}</span></span>`;
   }).join('');
 }
 
