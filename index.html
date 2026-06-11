@@ -112,6 +112,58 @@
   .br-trilho{height:12px;background:#fff;border-radius:6px;overflow:hidden;}
   .br-fill{height:100%;background:var(--bcor);border-radius:6px;transition:width .6s;}
   .br-det{font-size:12px;color:var(--cinza);margin-top:5px;}
+  /* mentimeter participante */
+  .escala-val{font-size:46px;font-weight:800;text-align:center;color:#127a40;line-height:1;margin:6px 0 4px;}
+  .escala-ext{display:flex;justify-content:space-between;font-size:12px;color:var(--cinza);margin-top:4px;}
+  .radar-item{display:flex;align-items:center;gap:10px;margin:9px 0;}
+  .radar-rot{width:84px;font-size:13.5px;font-weight:600;color:#2c3a42;flex-shrink:0;}
+  .radar-item input{flex:1;}
+  .radar-num{width:22px;text-align:right;font-weight:700;color:#0f9b8e;}
+  /* mentimeter telão */
+  .menti-nuvem{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;align-items:center;padding:14px 4px;}
+  .mb-linha{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:14px;}
+  .mb-rot{width:130px;flex-shrink:0;color:#2c3a42;font-weight:600;}
+  .mb-trilho{flex:1;background:var(--suave);border-radius:7px;height:26px;overflow:hidden;}
+  .mb-fill{height:100%;border-radius:7px;transition:width .5s;min-width:2px;}
+  .mb-num{width:74px;flex-shrink:0;font-weight:700;color:#2c3a42;font-size:13px;}
+  .pz-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;}
+  .pz-svg{width:200px;height:200px;flex-shrink:0;}
+  .pz-legs{flex:1;min-width:160px;}
+  .pz-leg{display:flex;align-items:center;gap:8px;font-size:14px;margin:7px 0;color:#2c3a42;}
+  .pz-cor{width:14px;height:14px;border-radius:3px;flex-shrink:0;}
+  .es-media{font-size:40px;font-weight:800;text-align:center;margin-bottom:10px;}
+  .es-media span{font-size:14px;font-weight:600;color:var(--cinza);}
+  .es-graf{display:flex;align-items:flex-end;gap:5px;height:150px;padding-top:8px;}
+  .es-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;}
+  .es-bar{width:100%;border-radius:5px 5px 0 0;min-height:2px;transition:height .5s;}
+  .es-rot{font-size:11px;color:var(--cinza);margin-top:5px;}
+  .rd-svg{width:100%;max-width:300px;display:block;margin:0 auto;}
+  .rd-legs{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-top:10px;font-size:13.5px;color:#2c3a42;}
+  .rd-leg b{color:#0f9b8e;}
+  /* apresentador */
+  .adm-nav{display:flex;gap:10px;}
+  .adm-nav .btn{margin-top:0;}
+  .adm-q{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fff;border:1.5px solid #d8e0db;border-radius:11px;padding:11px 13px;margin:8px 0;cursor:pointer;font-size:14px;}
+  .adm-q.ativa{border-color:#127a40;background:#e7f7ee;}
+  .adm-n{width:24px;height:24px;border-radius:50%;background:#127a40;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .adm-t{flex:1;color:#2c3a42;}
+  .adm-tipo{font-size:11px;text-transform:uppercase;color:var(--cinza);font-weight:700;}
+  /* dois cards de escolha na tela inicial */
+  .card-escolha{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid #e6ece8;border-radius:16px;padding:20px;margin-top:16px;cursor:pointer;transition:transform .08s,box-shadow .15s,border-color .15s;box-shadow:0 2px 10px rgba(0,0,0,.04);}
+  .card-escolha:active{transform:scale(.985);}
+  .card-menti{border-left:6px solid #8a4fd6;}
+  .card-menti:hover{border-color:#8a4fd6;box-shadow:0 4px 16px rgba(138,79,214,.16);}
+  .card-quiz{border-left:6px solid #1b9e54;}
+  .card-quiz:hover{border-color:#1b9e54;box-shadow:0 4px 16px rgba(27,158,84,.16);}
+  .ce-icone{font-size:34px;line-height:1;flex-shrink:0;}
+  .ce-txt{flex:1;}
+  .ce-tit{font-size:19px;font-weight:800;color:#1d2630;margin-bottom:3px;}
+  .ce-sub{font-size:13.5px;color:var(--cinza);line-height:1.4;}
+  .ce-seta{font-size:30px;color:#c2ccc6;font-weight:700;flex-shrink:0;}
+  .acoes-sec{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap;}
+  .link-sec{background:none;border:none;color:var(--verde-esc);font-size:14px;font-weight:600;cursor:pointer;padding:8px 12px;border-radius:8px;}
+  .link-sec:hover{background:var(--suave);}
+  .qr-tit{font-size:18px;font-weight:800;text-align:center;margin-bottom:4px;}
 </style>
 </head>
 <body>
@@ -264,6 +316,10 @@ let nome="",idx=0,pontos=0,respondeu=false,detalhe=[];
 const app=document.getElementById('app');
 const params=new URLSearchParams(location.search);
 const modoPainel=params.get('painel')==='1';
+// Mentimeter: modo=menti (participante), modo=menti-telao (telão público), modo=menti-admin (apresentador)
+const modoMenti=params.get('modo');
+const ADMIN_CHAVE="clima2026";
+const chaveOk=(params.get('chave')===ADMIN_CHAVE);
 
 // Catálogo de municípios. Para adicionar um novo, basta incluir aqui (slug: nome).
 // Qualquer slug informado em ?cidade= funciona mesmo sem estar no catálogo.
@@ -297,23 +353,27 @@ function telaInicial(){
     <div class="topo">
       <span class="tag">Conferência Municipal de Saúde</span>
       <h1>Saúde e Clima: quanto você sabe?</h1>
-      <p class="sub">Doze perguntas sobre o que acontece no seu quintal, na sua rua e na sua cidade. Cada pessoa responde no seu tempo.</p>
+      <p class="sub">São 12 perguntas sobre o que acontece no seu quintal, na sua rua e na sua cidade. Cada pessoa responde no seu tempo.</p>
     </div>
     <div class="card">
       ${cidadeNome?`<div class="cidade-selo">${escapeHtml(cidadeNome)}</div>`:''}
       <label for="nm">Seu nome ou apelido</label>
       <input type="text" id="nm" placeholder="Ex: Maria S." maxlength="22" autocomplete="off">
       <button class="btn btn-verde" id="comecar">Começar o quiz</button>
-      <button class="btn btn-claro" id="verpainel">Ver resultados do grupo</button>
-      <button class="btn btn-claro" id="abrirqr">Mostrar QR code</button>
+      <div class="acoes-sec">
+        <button class="link-sec" id="verpainel">Ver resultados do grupo</button>
+        <button class="link-sec" id="abrirqr">QR codes do evento</button>
+      </div>
       ${firebaseOk?'':'<div class="hint">Modo offline: resultados e sugestões desativados (Firebase não configurado).</div>'}
     </div>
     <div class="rodape">${cidadeNome?escapeHtml(cidadeNome):'Cáceres-MT'} · Saúde e mudanças climáticas</div>`;
-  document.getElementById('comecar').onclick=()=>{
+  const ir=()=>{
     const v=document.getElementById('nm').value.trim();
     if(!v){document.getElementById('nm').focus();return;}
     nome=v;idx=0;pontos=0;detalhe=[];irPara(0);
   };
+  document.getElementById('comecar').onclick=ir;
+  document.getElementById('nm').addEventListener('keydown',e=>{if(e.key==='Enter')ir();});
   document.getElementById('verpainel').onclick=telaPainel;
   document.getElementById('abrirqr').onclick=telaQR;
 }
@@ -337,12 +397,33 @@ function telaEscolheCidade(){
 
 function telaQR(){
   app.innerHTML=`
-    <div class="topo"><span class="tag">Compartilhar</span><h1>Aponte a câmera</h1>
-    <p class="sub">Cada pessoa abre o quiz de ${escapeHtml(cidadeNome)} no próprio celular.</p></div>
-    <div class="card"><div id="qrbox"></div>
-    <div class="url-mini">${urlBase()}</div>
-    <button class="btn btn-azul" id="voltar">Voltar</button></div>`;
-  new QRCode(document.getElementById('qrbox'),{text:urlBase(),width:220,height:220,colorDark:"#127a40",colorLight:"#ffffff"});
+    <div class="topo"><span class="tag">QR codes do evento</span><h1>Aponte a câmera</h1>
+    <p class="sub">Cada momento tem o seu QR. Projete ou imprima o que for usar.</p></div>
+
+    <div class="card" style="border-top:6px solid #8a4fd6">
+      <div class="qr-tit" style="color:#6a37ab">📊 Sondagem ao vivo</div>
+      <p class="hint" style="text-align:center;margin:0 0 10px">Use no momento da sondagem, com o telão ligado.</p>
+      <div id="qrSond" style="display:flex;justify-content:center"></div>
+      <div class="url-mini">${mentiUrl('menti')}</div>
+    </div>
+
+    <div class="card" style="border-top:6px solid #1b9e54">
+      <div class="qr-tit" style="color:#127a40">🧠 Quiz</div>
+      <p class="hint" style="text-align:center;margin:0 0 10px">Use no momento do quiz. Cada pessoa responde no seu ritmo.</p>
+      <div id="qrQuiz" style="display:flex;justify-content:center"></div>
+      <div class="url-mini">${urlBase()}</div>
+    </div>
+
+    <div class="card">
+      <div class="qr-tit" style="color:#1d2630;font-size:15px">Links só para você (organização)</div>
+      <p class="hint" style="text-align:left;margin-top:8px"><b>Telão da sondagem</b> (projetar): <span class="url-mini" style="text-align:left">${mentiUrl('menti-telao')}</span></p>
+      <p class="hint" style="text-align:left"><b>Controle da sondagem</b> (no seu celular): <span class="url-mini" style="text-align:left">${mentiUrl('menti-admin')}&chave=${ADMIN_CHAVE}</span></p>
+      <p class="hint" style="text-align:left"><b>Painel de resultados do quiz</b> (projetar): <span class="url-mini" style="text-align:left">${urlPainel()}</span></p>
+    </div>
+
+    <button class="btn btn-claro" id="voltar">Voltar</button>`;
+  try{ new QRCode(document.getElementById('qrSond'),{text:mentiUrl('menti'),width:200,height:200,colorDark:"#6a37ab",colorLight:"#ffffff"}); }catch(e){}
+  try{ new QRCode(document.getElementById('qrQuiz'),{text:urlBase(),width:200,height:200,colorDark:"#127a40",colorLight:"#ffffff"}); }catch(e){}
   document.getElementById('voltar').onclick=telaInicial;
 }
 
@@ -676,7 +757,308 @@ function renderSugestoes(arr){
 
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
-if(modoPainel)telaPainel();else telaInicial();
+/* ============================================================
+   MENTIMETER  -  sondagem antes do quiz
+   5 perguntas, cada uma com um tipo de visualizacao:
+   1 nuvem  2 pizza  3 barras  4 escala  5 radar
+   Estado compartilhado em Firebase: nó /mentimeter
+     - /ativa : indice da pergunta no ar (controlado pelo apresentador)
+     - /respostas/<i>/<pushid> : respostas dos participantes
+   ============================================================ */
+const MENTI_RKEY = (cidadeSlug ? ('quiz_saude_clima/cidades/'+cidadeSlug) : 'quiz_saude_clima/geral')+'/mentimeter';
+
+const MENTI=[
+  { tipo:"nuvem", cor:"#8a4fd6",
+    q:"Quando você ouve as palavras MUDANÇA CLIMÁTICA, qual a primeira palavra que vem à cabeça?",
+    ajuda:"Escreva uma palavra só." },
+  { tipo:"pizza", cor:"#1f7ae0",
+    q:"Você já sentiu na pele algum efeito do clima mudando?",
+    opcoes:["Sim, com certeza","Acho que sim","Não","Não sei dizer"],
+    cores:["#1b9e54","#7ac77f","#f0a830","#bcc4cc"] },
+  { tipo:"barras", cor:"#e0463a",
+    q:"Na sua região, o que mais mudou no clima nos últimos anos?",
+    opcoes:["Calor mais forte","Secas mais longas","Chuvas mais intensas","Mais queimadas e fumaça"],
+    cores:["#e0463a","#f0a830","#1f7ae0","#8a4fd6"] },
+  { tipo:"escala", cor:"#127a40",
+    q:"De 0 a 10, quanto você sente que entende sobre mudanças climáticas?",
+    min:0, max:10 },
+  { tipo:"radar", cor:"#0f9b8e",
+    q:"Quanto cada tema abaixo te preocupa? (0 = nada, 5 = muito)",
+    eixos:["Calor","Água","Saúde","Queimadas","Comida"], min:0, max:5 }
+];
+
+let mIdx=0;        // pergunta ativa (espelha o Firebase)
+let mRespondi={};  // {indice: true} para nao deixar responder 2x no mesmo aparelho
+
+function mentiUrl(modo){
+  const u=location.href.split('?')[0];
+  const c=cidadeSlug?('&cidade='+cidadeSlug):'';
+  return u+'?modo='+modo+c;
+}
+
+/* ---------- PARTICIPANTE ---------- */
+function mentiParticipante(){
+  if(!firebaseOk){ app.innerHTML='<div class="wrap"><div class="card"><div class="erro-cfg">Firebase não configurado.</div></div></div>'; return; }
+  db.ref(MENTI_RKEY+'/ativa').on('value',s=>{
+    const a=s.val(); mIdx=(a===null||a===undefined)?-1:a;
+    desenhaParticipante();
+  });
+}
+function desenhaParticipante(){
+  if(mIdx<0){
+    app.innerHTML=`<div class="topo"><span class="tag">Aguarde</span><h1>Logo começamos</h1>
+      <p class="sub">O apresentador vai liberar a primeira pergunta. Deixe esta tela aberta.</p></div>`;
+    return;
+  }
+  const m=MENTI[mIdx];
+  if(mRespondi[mIdx]){
+    app.innerHTML=`<div class="topo"><span class="tag" style="background:${m.cor};color:#fff">Resposta enviada</span>
+      <h1>Obrigado!</h1><p class="sub">Acompanhe o resultado no telão. Aguarde a próxima pergunta.</p></div>`;
+    return;
+  }
+  let corpo='';
+  if(m.tipo==='nuvem'){
+    corpo=`<input type="text" id="mword" maxlength="24" placeholder="uma palavra" autocomplete="off">
+      <button class="btn" style="background:${m.cor};color:#fff" id="menvia">Enviar</button>`;
+  } else if(m.tipo==='pizza'||m.tipo==='barras'){
+    corpo=m.opcoes.map((o,i)=>`<button class="opcao mopt" data-i="${i}">${escapeHtml(o)}</button>`).join('');
+  } else if(m.tipo==='escala'){
+    corpo=`<div class="escala-val" id="mval">${Math.round((m.min+m.max)/2)}</div>
+      <input type="range" id="mrange" min="${m.min}" max="${m.max}" value="${Math.round((m.min+m.max)/2)}" step="1" style="width:100%">
+      <div class="escala-ext"><span>${m.min}</span><span>${m.max}</span></div>
+      <button class="btn" style="background:${m.cor};color:#fff" id="menvia">Enviar</button>`;
+  } else if(m.tipo==='radar'){
+    corpo=m.eixos.map((e,i)=>`<div class="radar-item">
+        <div class="radar-rot">${escapeHtml(e)}</div>
+        <input type="range" class="reixo" data-i="${i}" min="${m.min}" max="${m.max}" value="0" step="1">
+        <div class="radar-num" id="rn${i}">0</div></div>`).join('')+
+      `<button class="btn" style="background:${m.cor};color:#fff" id="menvia">Enviar</button>`;
+  }
+  app.innerHTML=`
+    <div class="card" style="border-top:6px solid ${m.cor}">
+      <div class="progresso"><span class="bloco-chip" style="--bcor:${m.cor}">Pergunta ${mIdx+1} de ${MENTI.length}</span></div>
+      <p class="pergunta" style="margin-top:14px">${escapeHtml(m.q)}</p>
+      ${m.ajuda?`<p class="hint" style="text-align:left;margin-top:-8px">${escapeHtml(m.ajuda)}</p>`:''}
+      <div class="opcoes" id="mcorpo">${corpo}</div>
+    </div>`;
+  ligaParticipante(m);
+}
+function ligaParticipante(m){
+  const enviar=(valor)=>{
+    db.ref(MENTI_RKEY+'/respostas/'+mIdx).push({v:valor,ts:Date.now()})
+      .then(()=>{mRespondi[mIdx]=true;desenhaParticipante();})
+      .catch(()=>{});
+  };
+  if(m.tipo==='nuvem'){
+    document.getElementById('menvia').onclick=()=>{
+      const w=(document.getElementById('mword').value||'').trim();
+      if(!w)return; enviar(w.toLowerCase());
+    };
+  } else if(m.tipo==='pizza'||m.tipo==='barras'){
+    [...document.querySelectorAll('.mopt')].forEach(b=>b.onclick=()=>enviar(parseInt(b.dataset.i)));
+  } else if(m.tipo==='escala'){
+    const r=document.getElementById('mrange'),v=document.getElementById('mval');
+    r.oninput=()=>v.textContent=r.value;
+    document.getElementById('menvia').onclick=()=>enviar(parseInt(r.value));
+  } else if(m.tipo==='radar'){
+    [...document.querySelectorAll('.reixo')].forEach(r=>r.oninput=()=>{document.getElementById('rn'+r.dataset.i).textContent=r.value;});
+    document.getElementById('menvia').onclick=()=>{
+      const vals=m.eixos.map((e,i)=>parseInt(document.querySelector('.reixo[data-i="'+i+'"]').value)||0);
+      enviar(vals);
+    };
+  }
+}
+
+/* ---------- TELÃO (resultados ao vivo) ---------- */
+function mentiTelao(){
+  if(!firebaseOk){ app.innerHTML='<div class="wrap"><div class="card"><div class="erro-cfg">Firebase não configurado.</div></div></div>'; return; }
+  db.ref(MENTI_RKEY+'/ativa').on('value',s=>{
+    const a=s.val(); mIdx=(a===null||a===undefined)?-1:a;
+    desenhaTelaoBase();
+    escutaRespostasTelao();
+  });
+}
+let _unsubResp=null;
+function escutaRespostasTelao(){
+  if(mIdx<0)return;
+  db.ref(MENTI_RKEY+'/respostas/'+mIdx).on('value',s=>{
+    const arr=[]; s.forEach(c=>arr.push(c.val().v));
+    desenhaResultado(arr);
+  });
+}
+function desenhaTelaoBase(){
+  if(mIdx<0){
+    app.innerHTML=`<div class="topo"><span class="tag">Mentimeter</span><h1>Saúde e Clima</h1>
+      <p class="sub">Aguardando o apresentador liberar a primeira pergunta.</p></div>`;
+    return;
+  }
+  const m=MENTI[mIdx];
+  app.innerHTML=`
+    <div class="topo"><span class="tag" style="background:${m.cor};color:#fff">Pergunta ${mIdx+1} de ${MENTI.length}</span>
+      <h1 style="color:${m.cor}">${escapeHtml(m.q)}</h1></div>
+    <div class="card" style="border-top:6px solid ${m.cor}"><div id="mresult"><div class="hint">Aguardando respostas...</div></div></div>`;
+}
+function desenhaResultado(arr){
+  const box=document.getElementById('mresult'); if(!box)return;
+  const m=MENTI[mIdx];
+  if(!arr.length){ box.innerHTML='<div class="hint">Aguardando respostas...</div>'; return; }
+  if(m.tipo==='nuvem') box.innerHTML=vizNuvem(arr);
+  else if(m.tipo==='pizza') box.innerHTML=vizPizza(arr,m);
+  else if(m.tipo==='barras') box.innerHTML=vizBarras(arr,m);
+  else if(m.tipo==='escala') box.innerHTML=vizEscala(arr,m);
+  else if(m.tipo==='radar') box.innerHTML=vizRadar(arr,m);
+}
+
+/* ---------- VISUALIZAÇÕES (SVG puro, sem libs) ---------- */
+function vizNuvem(arr){
+  const freq={};
+  arr.forEach(w=>{ w=String(w).trim().toLowerCase(); if(w)freq[w]=(freq[w]||0)+1; });
+  const pares=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,40);
+  const maxf=pares[0][1], minf=pares[pares.length-1][1];
+  const cores=["#8a4fd6","#1f7ae0","#1b9e54","#e0463a","#f0a830","#0f9b8e"];
+  const palavras=pares.map(([w,f],k)=>{
+    const t=maxf===minf?0.5:(f-minf)/(maxf-minf);
+    const size=20+Math.round(t*44);
+    return `<span style="font-size:${size}px;color:${cores[k%cores.length]};font-weight:700;line-height:1.1">${escapeHtml(w)}</span>`;
+  }).join(' ');
+  return `<div style="font-size:13px;color:var(--cinza);margin-bottom:10px">${arr.length} respostas</div>
+    <div class="menti-nuvem">${palavras}</div>`;
+}
+function vizBarras(arr,m){
+  const cont=m.opcoes.map(()=>0);
+  arr.forEach(v=>{ if(v>=0&&v<cont.length)cont[v]++; });
+  const total=arr.length, maior=Math.max(1,...cont);
+  const linhas=m.opcoes.map((o,i)=>{
+    const w=Math.round(cont[i]/maior*100);
+    const pc=total?Math.round(cont[i]/total*100):0;
+    return `<div class="mb-linha"><div class="mb-rot">${escapeHtml(o)}</div>
+      <div class="mb-trilho"><div class="mb-fill" style="width:${w}%;background:${m.cores[i]}"></div></div>
+      <div class="mb-num">${cont[i]} · ${pc}%</div></div>`;
+  }).join('');
+  return `<div style="font-size:13px;color:var(--cinza);margin-bottom:10px">${total} respostas</div>${linhas}`;
+}
+function vizPizza(arr,m){
+  const cont=m.opcoes.map(()=>0);
+  arr.forEach(v=>{ if(v>=0&&v<cont.length)cont[v]++; });
+  const total=arr.length||1;
+  let ang=-90, fatias='';
+  const cx=130,cy=130,r=110;
+  m.opcoes.forEach((o,i)=>{
+    const frac=cont[i]/total; if(frac<=0)return;
+    const a2=ang+frac*360;
+    const x1=cx+r*Math.cos(Math.PI*ang/180), y1=cy+r*Math.sin(Math.PI*ang/180);
+    const x2=cx+r*Math.cos(Math.PI*a2/180),  y2=cy+r*Math.sin(Math.PI*a2/180);
+    const big=frac>0.5?1:0;
+    fatias+=`<path d="M${cx},${cy} L${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 ${big} 1 ${x2.toFixed(1)},${y2.toFixed(1)} Z" fill="${m.cores[i]}"></path>`;
+    ang=a2;
+  });
+  const leg=m.opcoes.map((o,i)=>{
+    const pc=Math.round(cont[i]/total*100);
+    return `<div class="pz-leg"><span class="pz-cor" style="background:${m.cores[i]}"></span>${escapeHtml(o)} — <b>${pc}%</b> (${cont[i]})</div>`;
+  }).join('');
+  return `<div style="font-size:13px;color:var(--cinza);margin-bottom:10px">${arr.length} respostas</div>
+    <div class="pz-wrap"><svg viewBox="0 0 260 260" class="pz-svg">${fatias}</svg><div class="pz-legs">${leg}</div></div>`;
+}
+function vizEscala(arr,m){
+  const nums=arr.map(Number).filter(n=>!isNaN(n));
+  const media=nums.length?(nums.reduce((a,b)=>a+b,0)/nums.length):0;
+  const cont={}; for(let i=m.min;i<=m.max;i++)cont[i]=0;
+  nums.forEach(n=>{ if(n>=m.min&&n<=m.max)cont[n]++; });
+  const maior=Math.max(1,...Object.values(cont));
+  let barras='';
+  for(let i=m.min;i<=m.max;i++){
+    const h=Math.round(cont[i]/maior*100);
+    barras+=`<div class="es-col"><div class="es-bar" style="height:${h}%;background:${m.cor}"></div><div class="es-rot">${i}</div></div>`;
+  }
+  return `<div class="es-media" style="color:${m.cor}">${media.toFixed(1)}<span> média · ${nums.length} respostas</span></div>
+    <div class="es-graf">${barras}</div>`;
+}
+function vizRadar(arr,m){
+  const n=m.eixos.length;
+  const soma=m.eixos.map(()=>0), cnt=m.eixos.map(()=>0);
+  arr.forEach(v=>{ if(Array.isArray(v))v.forEach((x,i)=>{ if(i<n){soma[i]+=Number(x)||0;cnt[i]++;} }); });
+  const med=m.eixos.map((e,i)=>cnt[i]?soma[i]/cnt[i]:0);
+  const cx=150,cy=140,R=105;
+  const pt=(i,val)=>{
+    const ang=-Math.PI/2 + i*2*Math.PI/n;
+    const rr=R*(val-m.min)/(m.max-m.min);
+    return [cx+rr*Math.cos(ang), cy+rr*Math.sin(ang)];
+  };
+  let grade='';
+  [0.25,0.5,0.75,1].forEach(f=>{
+    const pts=m.eixos.map((e,i)=>{const p=pt(i,m.min+f*(m.max-m.min));return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ');
+    grade+=`<polygon points="${pts}" fill="none" stroke="#e0e6e2" stroke-width="1"></polygon>`;
+  });
+  let eixos='';
+  m.eixos.forEach((e,i)=>{
+    const p=pt(i,m.max);
+    eixos+=`<line x1="${cx}" y1="${cy}" x2="${p[0].toFixed(1)}" y2="${p[1].toFixed(1)}" stroke="#e0e6e2"></line>`;
+    const lp=pt(i,m.max*1.16);
+    eixos+=`<text x="${lp[0].toFixed(1)}" y="${lp[1].toFixed(1)}" font-size="13" fill="#2c3a42" text-anchor="middle" dominant-baseline="middle">${escapeHtml(e)}</text>`;
+  });
+  const poly=m.eixos.map((e,i)=>{const p=pt(i,med[i]);return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ');
+  const leg=m.eixos.map((e,i)=>`<span class="rd-leg">${escapeHtml(e)}: <b>${med[i].toFixed(1)}</b></span>`).join('');
+  return `<div style="font-size:13px;color:var(--cinza);margin-bottom:6px">${arr.length} respostas</div>
+    <svg viewBox="0 0 300 300" class="rd-svg">${grade}${eixos}
+      <polygon points="${poly}" fill="${m.cor}33" stroke="${m.cor}" stroke-width="2.5"></polygon></svg>
+    <div class="rd-legs">${leg}</div>`;
+}
+
+/* ---------- APRESENTADOR ---------- */
+function mentiAdmin(){
+  if(!chaveOk){
+    app.innerHTML=`<div class="topo"><span class="tag">Apresentador</span><h1>Acesso restrito</h1>
+      <p class="sub">Este painel precisa da chave de apresentador no link.</p></div>
+      <div class="card"><label for="ch">Digite a chave</label>
+      <input type="text" id="ch" placeholder="chave"><button class="btn btn-verde" id="okch">Entrar</button></div>`;
+    document.getElementById('okch').onclick=()=>{
+      const v=document.getElementById('ch').value.trim();
+      location.href=mentiUrl('menti-admin')+'&chave='+encodeURIComponent(v);
+    };
+    return;
+  }
+  if(!firebaseOk){ app.innerHTML='<div class="wrap"><div class="card"><div class="erro-cfg">Firebase não configurado.</div></div></div>'; return; }
+  db.ref(MENTI_RKEY+'/ativa').on('value',s=>{
+    const a=s.val(); mIdx=(a===null||a===undefined)?-1:a;
+    desenhaAdmin();
+  });
+}
+function desenhaAdmin(){
+  const atualTxt = mIdx<0 ? 'Nenhuma (tela de espera)' : `Pergunta ${mIdx+1}: ${MENTI[mIdx].tipo}`;
+  const lista=MENTI.map((m,i)=>`<button class="adm-q ${i===mIdx?'ativa':''}" data-i="${i}">
+    <span class="adm-n">${i+1}</span><span class="adm-t">${escapeHtml(m.q)}</span><span class="adm-tipo">${m.tipo}</span></button>`).join('');
+  app.innerHTML=`
+    <div class="topo"><span class="tag" style="background:#127a40;color:#fff">Apresentador</span>
+      <h1>Controle do Mentimeter</h1><p class="sub">No ar: <b>${atualTxt}</b></p></div>
+    <div class="card">
+      <div class="adm-nav">
+        <button class="btn btn-claro" id="prev">‹ Anterior</button>
+        <button class="btn btn-verde" id="next">Próxima ›</button>
+      </div>
+      <button class="btn btn-claro" id="espera" style="margin-top:10px">Tela de espera</button>
+      <button class="btn btn-claro" id="zerar" style="margin-top:10px">Apagar respostas desta pergunta</button>
+    </div>
+    <div class="card"><div class="secao-tit" style="margin-top:0">Ir direto para</div>${lista}</div>
+    <div class="card">
+      <div class="secao-tit" style="margin-top:0">Links para projetar e divulgar</div>
+      <p class="hint" style="text-align:left">Telão (projete este): <span class="url-mini" style="text-align:left">${mentiUrl('menti-telao')}</span></p>
+      <p class="hint" style="text-align:left">Participantes (QR / link): <span class="url-mini" style="text-align:left">${mentiUrl('menti')}</span></p>
+      <div id="qrparti" style="display:flex;justify-content:center;margin-top:8px"></div>
+    </div>`;
+  const setAtiva=(i)=>db.ref(MENTI_RKEY+'/ativa').set(i);
+  document.getElementById('prev').onclick=()=>setAtiva(Math.max(-1,mIdx-1));
+  document.getElementById('next').onclick=()=>setAtiva(Math.min(MENTI.length-1,mIdx+1));
+  document.getElementById('espera').onclick=()=>setAtiva(-1);
+  document.getElementById('zerar').onclick=()=>{ if(mIdx>=0&&confirm('Apagar todas as respostas da pergunta '+(mIdx+1)+'?'))db.ref(MENTI_RKEY+'/respostas/'+mIdx).remove(); };
+  [...document.querySelectorAll('.adm-q')].forEach(b=>b.onclick=()=>setAtiva(parseInt(b.dataset.i)));
+  try{ new QRCode(document.getElementById('qrparti'),{text:mentiUrl('menti'),width:150,height:150,colorDark:'#127a40',colorLight:'#fff'}); }catch(e){}
+}
+
+if(modoMenti==='menti') mentiParticipante();
+else if(modoMenti==='menti-telao') mentiTelao();
+else if(modoMenti==='menti-admin') mentiAdmin();
+else if(modoPainel)telaPainel();
+else telaInicial();
 </script>
 </body>
 </html>
