@@ -164,6 +164,20 @@
   .link-sec{background:none;border:none;color:var(--verde-esc);font-size:14px;font-weight:600;cursor:pointer;padding:8px 12px;border-radius:8px;}
   .link-sec:hover{background:var(--suave);}
   .qr-tit{font-size:18px;font-weight:800;text-align:center;margin-bottom:4px;}
+  /* dois cards: lado a lado no desktop, empilhado no celular */
+  .dois-cards{display:flex;flex-direction:column;gap:16px;margin-top:8px;}
+  .card-grande{background:#fff;border:1px solid #e6ece8;border-radius:18px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.05);display:flex;flex-direction:column;}
+  .card-g-quiz{border-top:6px solid #1b9e54;}
+  .card-g-menti{border-top:6px solid #8a4fd6;}
+  .cg-icone{font-size:40px;line-height:1;margin-bottom:10px;}
+  .cg-tit{font-size:22px;font-weight:800;color:#1d2630;margin-bottom:6px;}
+  .cg-sub{font-size:14px;color:var(--cinza);line-height:1.45;}
+  .btn-menti{background:#8a4fd6;color:#fff;margin-top:auto;}
+  @media(min-width:760px){
+    .wrap:has(.dois-cards){max-width:880px;}
+    .dois-cards{flex-direction:row;align-items:stretch;}
+    .dois-cards>.card-grande{flex:1;}
+  }
 </style>
 </head>
 <body>
@@ -353,19 +367,29 @@ function telaInicial(){
     <div class="topo">
       <span class="tag">Conferência Municipal de Saúde</span>
       <h1>Saúde e Clima: quanto você sabe?</h1>
-      <p class="sub">São 12 perguntas sobre o que acontece no seu quintal, na sua rua e na sua cidade. Cada pessoa responde no seu tempo.</p>
+      <p class="sub">Escolha por onde começar.${cidadeNome?' '+escapeHtml(cidadeNome)+'.':''}</p>
     </div>
-    <div class="card">
-      ${cidadeNome?`<div class="cidade-selo">${escapeHtml(cidadeNome)}</div>`:''}
-      <label for="nm">Seu nome ou apelido</label>
-      <input type="text" id="nm" placeholder="Ex: Maria S." maxlength="22" autocomplete="off">
-      <button class="btn btn-verde" id="comecar">Começar o quiz</button>
-      <div class="acoes-sec">
-        <button class="link-sec" id="verpainel">Ver resultados do grupo</button>
-        <button class="link-sec" id="abrirqr">QR codes do evento</button>
+    <div class="dois-cards">
+      <div class="card-grande card-g-quiz">
+        <div class="cg-icone">🧠</div>
+        <div class="cg-tit">Fazer o quiz</div>
+        <div class="cg-sub">12 perguntas sobre saúde e clima na sua cidade. Cada um responde no seu ritmo e descobre quanto sabe.</div>
+        <label for="nm" style="margin-top:14px">Seu nome ou apelido</label>
+        <input type="text" id="nm" placeholder="Ex: Maria S." maxlength="22" autocomplete="off">
+        <button class="btn btn-verde" id="comecar">Começar o quiz</button>
       </div>
-      ${firebaseOk?'':'<div class="hint">Modo offline: resultados e sugestões desativados (Firebase não configurado).</div>'}
+      <div class="card-grande card-g-menti">
+        <div class="cg-icone">📊</div>
+        <div class="cg-tit">Sondagem ao vivo</div>
+        <div class="cg-sub">Perguntas rápidas conduzidas no telão. Responda e veja o resultado do grupo aparecer na hora.</div>
+        <button class="btn btn-menti" id="irmenti">Entrar na sondagem</button>
+      </div>
     </div>
+    <div class="acoes-sec">
+      <button class="link-sec" id="verpainel">Ver resultados do grupo</button>
+      <button class="link-sec" id="abrirqr">QR codes do evento</button>
+    </div>
+    ${firebaseOk?'':'<div class="hint">Modo offline: resultados e sugestões desativados (Firebase não configurado).</div>'}
     <div class="rodape">${cidadeNome?escapeHtml(cidadeNome):'Cáceres-MT'} · Saúde e mudanças climáticas</div>`;
   const ir=()=>{
     const v=document.getElementById('nm').value.trim();
@@ -374,6 +398,7 @@ function telaInicial(){
   };
   document.getElementById('comecar').onclick=ir;
   document.getElementById('nm').addEventListener('keydown',e=>{if(e.key==='Enter')ir();});
+  document.getElementById('irmenti').onclick=()=>{ location.href=mentiUrl('menti'); };
   document.getElementById('verpainel').onclick=telaPainel;
   document.getElementById('abrirqr').onclick=telaQR;
 }
