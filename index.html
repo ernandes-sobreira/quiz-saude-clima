@@ -794,22 +794,22 @@ const MENTI_RKEY = (cidadeSlug ? ('quiz_saude_clima/cidades/'+cidadeSlug) : 'qui
 
 const MENTI=[
   { tipo:"nuvem", cor:"#8a4fd6",
-    q:"Quando você ouve as palavras MUDANÇA CLIMÁTICA, qual a primeira palavra que vem à cabeça?",
-    ajuda:"Escreva uma palavra só." },
-  { tipo:"pizza", cor:"#1f7ae0",
-    q:"Você já sentiu na pele algum efeito do clima mudando?",
-    opcoes:["Sim, com certeza","Acho que sim","Não","Não sei dizer"],
-    cores:["#1b9e54","#7ac77f","#f0a830","#bcc4cc"] },
+    q:"Em uma palavra: o que mais ameaça a saúde na sua cidade quando o clima muda?",
+    ajuda:"Escreva uma palavra só. Ex: calor, dengue, fumaça, seca." },
   { tipo:"barras", cor:"#e0463a",
-    q:"Na sua região, o que mais mudou no clima nos últimos anos?",
-    opcoes:["Calor mais forte","Secas mais longas","Chuvas mais intensas","Mais queimadas e fumaça"],
-    cores:["#e0463a","#f0a830","#1f7ae0","#8a4fd6"] },
-  { tipo:"escala", cor:"#127a40",
-    q:"De 0 a 10, quanto você sente que entende sobre mudanças climáticas?",
-    min:0, max:10 },
+    q:"Se a prefeitura pudesse priorizar UMA ação neste ano, qual deveria ser?",
+    opcoes:["Plantar e cuidar de árvores","Melhorar água e esgoto","Vigiar doenças ligadas ao clima","Criar um plano para o calor extremo","Combater as queimadas"],
+    cores:["#1b9e54","#1f7ae0","#8a4fd6","#f0a830","#e0463a"] },
+  { tipo:"pizza", cor:"#1f7ae0",
+    q:"A sua cidade está preparada para uma emergência do clima (enchente, calor extremo, seca prolongada)?",
+    opcoes:["Sim, está preparada","Em parte","Não está","Não sei dizer"],
+    cores:["#1b9e54","#f0a830","#e0463a","#bcc4cc"] },
   { tipo:"radar", cor:"#0f9b8e",
-    q:"Quanto cada tema abaixo te preocupa? (0 = nada, 5 = muito)",
-    eixos:["Calor","Água","Saúde","Queimadas","Comida"], min:0, max:5 }
+    q:"Quanto cada área da cidade precisa avançar? (0 = já está bem, 5 = precisa muito)",
+    eixos:["Água","Árvores","Saúde","Lixo","Defesa Civil"], min:0, max:5 },
+  { tipo:"nuvem", cor:"#127a40",
+    q:"Saindo daqui, qual o primeiro passo que VOCÊ vai cobrar ou fazer pela sua cidade?",
+    ajuda:"Escreva uma ou duas palavras. Ex: cobrar arborização, denunciar queimada." }
 ];
 
 let mIdx=0;        // pergunta ativa (espelha o Firebase)
